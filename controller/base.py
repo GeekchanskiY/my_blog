@@ -1,0 +1,4 @@
+class BaseController:
+    @staticmethod
+    def index():
+        return [1, 2, 3, 4, 5]

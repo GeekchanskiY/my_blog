@@ -1,42 +1,139 @@
+:root{
+    --bg: #F9F7F7;
+    --fg: #112D4E;
+    --accent: #3F72AF;
+    --text: #DBE2EF;
+    --box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
 body {
-    background-color: #fffcff;
-    color: #50514f;
+    background-color: var(--bg);
 }
 
 header {
+    display: flex;
+    justify-content: space-between;
     width: 90%;
     margin-left: 5%;
-    padding: 10px;
-    background-color: #247ba0;
+    padding: 10px 30px;
+    background-color: var(--fg);
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
 }
 
 #header-link{
-    color: #5f0724;
+    color: var(--text);
     text-decoration: none;
-    font-size: 1.2rem;
-    margin-left: 10px;
+    font-weight: bold;
     transition: .3s;
 }
 
 #header-link:hover {
-    color: #000;
-    background-color: #fff;
+    color: var(--accent);
 }
 
 #login-link{
-    color: #fffcff;
-    float: right;
-    margin-right: 20px;
+    text-decoration: none;
+    color: var(--text);
 }
 
-.header-link{
-    color: #c3b299;
+main {
+    margin-top: 50px;
+    min-height: calc(100vh - 2rem - 220px);
+    padding: 20px;
+    border-radius: 15px;
 }
 
 footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
     width: 90%;
     margin-left: 5%;
+    margin-right: 5%;
     padding: 10px;
-    background-color: #247ba0;
+    background-color: var(--fg);
     margin-top: 50px;
+    border-radius: 15px;
+    font-size: 1rem;
+    box-shadow: var(--box-shadow);
+}
+
+#copyright {
+    display: inline-block;
+    width: 100%;
+    color: var(--fg);
+    font-size: 0.8rem;
+    text-align: center;
+
+}
+
+footer a {
+    text-decoration: underline;
+}
+
+
+a {
+    color: var(--text);
+    transition: .3s;
+}
+
+a:hover{
+    color: var(--accent);
+}
+
+
+form {
+    width: 50%;
+    margin-left: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+    background-color: var(--accent);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+
+form button{
+    background-color: var(--bg);
+    color: var(--fg);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+form input[type=reset] {
+    background-color: var(--bg);
+    color: var(--fg);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+
+form input[type=text], form input[type=password], form textarea {
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    
+}
+
+form textarea {
+    height: 200px;
+    resize: none;
+}
+
+.form-header {
+    font-size: 1.5rem;
+    color: var(--bg);
+    font-weight: bold;
 }

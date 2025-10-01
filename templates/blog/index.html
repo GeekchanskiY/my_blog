@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %} Мой блог {% endblock %}
+
+
+{% block main %} 
+    {% for i in post_ids %}
+        <div class="post">
+            <a href="/blog/post/{{ i }}" style="color: black;"> Пост блога {{ i }} </a>
+        </div>
+    {% endfor %}
+{% endblock %}
