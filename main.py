@@ -1,10 +1,15 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from view.base import base_bp
 from view.blog import blog_bp
 from view.user import user_bp
+import werkzeug.exceptions as exceptions
 
 
 app = Flask(__name__)
+
+@app.errorhandler(exceptions.HTTPException)
+def handle_bad_request(e):
+    return render_template('400.html', error=e), 400
 
 @app.before_request
 def add_request_id():

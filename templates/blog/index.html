@@ -4,6 +4,9 @@
 
 
 {% block main %} 
+    {% if not post_ids %}
+        <h2>Постов нет,  <a href="/blog/add_post" style="color: black;">добавить?</a></h2>
+    {% endif %}
     {% for i in post_ids %}
         <div class="post">
             <a href="/blog/post/{{ i.id }}"> {{ i.id }} - {{ i.title }} </a>

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from model.models import BlogItem
-from db import Session
 import random
+from controller.blog import BlogController as controller
+import werkzeug.exceptions as exceptions
 
 
 blog_bp = Blueprint('blog', __name__, template_folder='templates/blog', url_prefix='/blog')
@@ -14,7 +14,12 @@ def add_request_id():
 
 @blog_bp.route("/post/<post_id>", methods=['GET'])
 def blog_post(post_id):
-    return render_template('blog/post.html', post_id=post_id, username=request.request_user)
+    try:
+        blog_item = controller.blog_post(post_id)
+    except ValueError:
+        raise exceptions.BadRequest("Post not found")
+
+    return render_template('blog/post.html', post=blog_item, username=request.request_user)
 
 
 @blog_bp.route("/add_post", methods=['GET', 'POST'])
@@ -23,18 +28,8 @@ def add_post():
         title = request.form['title']
         content = request.form['content']
 
-        if not title or not content:
-            return "Title and content cannot be empty", 400
-        
-        with Session as session:
-            new_post = BlogItem(title=title, content=content)
+        post_id = controller.add_post(title, content)
 
-            session.add(new_post)
-
-            session.commit()
-
-            session.refresh(new_post)
-
-        return redirect(url_for('blog.blog_post', post_id=new_post.id))
+        return redirect(url_for('blog.blog_post', post_id=post_id))
 
     return render_template('blog/add_post.html', username=request.request_user)

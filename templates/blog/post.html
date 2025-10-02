@@ -5,8 +5,11 @@
 
 {% block main %} 
 <div class="post">
-    <h1>Пост блога {{ post_id }}</h1>
-    <span>Это содержимое поста блога.</p> 
+    <h1>{{ post.id }} - {{ post.title }}</h1>
+    <p>{{ post.content }}</p> 
+    <span>Создан:{{ post.created_at }} </span> <br>
+    <span>Обновлен:{{ post.updated_at }}</span>
+    
 </div>
 
 
