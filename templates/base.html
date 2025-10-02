@@ -14,7 +14,11 @@
 <header>
     <a id="header-link" href="/">Blog</a>
     {% if username %}
-        <a href="/user/logout" id="login-link">Logout</a>
+        <div class="auth-block">
+            <span id="user-name" style="color: white;">Привет, {{ username }}!</span>
+            <a href="/user/logout" id="logout-link">Logout</a>
+        </div>
+        
     {% else %}
         <div class="auth-block">
             <a href="/user/login" id="login-link">Login</a>

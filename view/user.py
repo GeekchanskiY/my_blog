@@ -12,10 +12,19 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        # validate username and password
-        # if valid, then set cookie and redirect to home page
+        
+        try:
+            user = controller.login(username, password)
+        except ValueError as e:
+            return render_template(
+                'login.html', 
+                form_error=str(e),
+                old_username=username,
+                username=request.request_user
+            )
+
         resp = make_response(redirect("/"))
-        resp.set_cookie('user_name', username)
+        resp.set_cookie('user_name', user.name)
 
         return resp
 

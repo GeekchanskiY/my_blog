@@ -24,3 +24,18 @@ class UserController:
             session.refresh(new_user)
         
         return new_user
+    
+    @staticmethod
+    def login(username, password):
+        
+        with Session as session:
+            existing_user = session.query(User).filter_by(name=username).first()
+            if not existing_user:
+                raise ValueError("Invalid username or password")
+
+            hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+            if existing_user.password != hashed_password:
+                raise ValueError("Invalid username or password")
+        
+        return existing_user
