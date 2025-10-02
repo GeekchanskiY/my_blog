@@ -33,3 +33,13 @@ def add_post():
         return redirect(url_for('blog.blog_post', post_id=post_id))
 
     return render_template('blog/add_post.html', username=request.request_user)
+
+
+@blog_bp.route("/delete/<post_id>", methods=['GET'])
+def delete_post(post_id):
+    is_deleted = controller.delete_post(post_id)
+
+    if is_deleted:
+        return redirect("/")
+    
+    raise exceptions.BadRequest("Post not found")

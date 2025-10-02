@@ -28,3 +28,16 @@ class BlogController:
             session.refresh(new_post)
         
         return new_post.id
+    
+    @staticmethod
+    def delete_post(post_id):
+        with Session as session:
+            post = session.query(BlogItem).filter(BlogItem.id == post_id).first()
+            
+            if post:
+                session.delete(post)
+                session.commit()
+
+                return True
+        
+        return False

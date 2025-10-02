@@ -7,9 +7,11 @@ import werkzeug.exceptions as exceptions
 
 app = Flask(__name__)
 
+
 @app.errorhandler(exceptions.HTTPException)
 def handle_bad_request(e):
     return render_template('400.html', error=e), 400
+
 
 @app.before_request
 def add_request_id():
@@ -17,12 +19,14 @@ def add_request_id():
 
     request.request_user = username
 
-app.register_blueprint(base_bp)
-app.register_blueprint(blog_bp)
-app.register_blueprint(user_bp)
 
 @app.route("/health", methods=['GET'])
 def health_check():
     return jsonify(
         {"status": "OK",}
     ), 200
+
+
+app.register_blueprint(base_bp)
+app.register_blueprint(blog_bp)
+app.register_blueprint(user_bp)

@@ -8,8 +8,10 @@
     <h1>{{ post.id }} - {{ post.title }}</h1>
     <p>{{ post.content }}</p> 
     <span>Создан:{{ post.created_at }} </span> <br>
-    <span>Обновлен:{{ post.updated_at }}</span>
-    
+    <span>Обновлен:{{ post.updated_at }}</span> 
+    <br><br><br>
+    <a href="/blog/delete/{{ post.id }}" style="color: red;">удалить</a>
+
 </div>
 
 
