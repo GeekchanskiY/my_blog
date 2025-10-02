@@ -25,6 +25,7 @@ def login():
 
         resp = make_response(redirect("/"))
         resp.set_cookie('user_name', user.name)
+        resp.set_cookie('token', user.password)
 
         return resp
 
@@ -51,11 +52,12 @@ def register():
 
         resp = make_response(redirect("/"))
         resp.set_cookie('user_name', user.name)
+        resp.set_cookie('token', user.password)
 
         return resp
 
     return render_template(
-                'register.html',
+        'register.html',
     )
 
 
@@ -63,5 +65,17 @@ def register():
 def logout():
     resp = make_response(redirect("/"))
     resp.set_cookie('user_name', '', expires=0)
+    resp.set_cookie('token', '', expires=0)
 
     return resp
+
+@user_bp.route("/", methods=['GET'])
+def get_users():
+    if request.request_user is None:
+        return "Unauthorized", 401
+
+
+    users = controller.get_users()
+    
+
+    return render_template('user_list.html', users=users, username=request.request_user)

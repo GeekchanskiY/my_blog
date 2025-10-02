@@ -3,6 +3,7 @@ from view.base import base_bp
 from view.blog import blog_bp
 from view.user import user_bp
 import werkzeug.exceptions as exceptions
+from controller.user import UserController
 
 
 app = Flask(__name__)
@@ -16,6 +17,13 @@ def handle_bad_request(e):
 @app.before_request
 def add_request_id():
     username = request.cookies.get('user_name', None)
+    token = request.cookies.get('token', None)
+
+    try:
+        UserController.check_user(username, token)
+    except ValueError:
+        username = None
+
 
     request.request_user = username
 

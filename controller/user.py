@@ -39,3 +39,22 @@ class UserController:
                 raise ValueError("Invalid username or password")
         
         return existing_user
+    
+    @staticmethod
+    def check_user(username, hashed_password):
+        with Session as session:
+            existing_user = session.query(User).filter_by(name=username).first()
+            if not existing_user:
+                raise ValueError("Invalid credentials")
+
+            if existing_user.password != hashed_password:
+                raise ValueError("Invalid credentials")
+        
+        return
+
+    @staticmethod
+    def get_users():
+        with Session as session:
+            users = session.query(User).all()
+        
+        return users
