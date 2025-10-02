@@ -16,7 +16,10 @@
     {% if username %}
         <a href="/user/logout" id="login-link">Logout</a>
     {% else %}
-        <a href="/user/login" id="login-link">Login</a>
+        <div class="auth-block">
+            <a href="/user/login" id="login-link">Login</a>
+            <a href="/user/register" id="login-link">Register</a>
+        </div>
     {% endif %}
 </header>
 

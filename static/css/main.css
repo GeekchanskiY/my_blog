@@ -147,3 +147,9 @@ form textarea {
 .post a:hover {
     color: var(--accent);
 }
+
+.auth-block {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
