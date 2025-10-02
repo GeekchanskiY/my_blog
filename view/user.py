@@ -6,7 +6,7 @@ user_bp = Blueprint('user', __name__, template_folder='../templates/user', url_p
 
 @user_bp.route("/login", methods=['GET', 'POST'])
 def login():
-    if request.cookies.get('user_name') is not None:
+    if request.request_user is not None:
         return "You are already logged in", 400
     
     if request.method == 'POST':

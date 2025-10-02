@@ -1,4 +1,10 @@
+from db import Session
+from model.models import BlogItem
+
 class BaseController:
     @staticmethod
     def index():
-        return [1, 2, 3, 4, 5]
+        with Session as session:
+            blog_items = session.query(BlogItem).all()
+
+        return blog_items

@@ -4,6 +4,7 @@
     --accent: #3F72AF;
     --text: #DBE2EF;
     --box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    --transition: all 0.3s ease;
 }
 
 body {
@@ -136,4 +137,13 @@ form textarea {
     font-size: 1.5rem;
     color: var(--bg);
     font-weight: bold;
+}
+
+.post a {
+    color: var(--fg);
+    transition: var(--transition);
+}
+
+.post a:hover {
+    color: var(--accent);
 }
