@@ -18,6 +18,9 @@ class BlogController:
         if not title or not content:
             raise ValueError("Title and content cannot be empty")
         
+        if title == "asd":
+            raise ValueError("Invalid title")
+        
         with Session as session:
             new_post = BlogItem(title=title, content=content, created_at=datetime.now(), updated_at=datetime.now())
 
@@ -44,7 +47,7 @@ class BlogController:
             post.updated_at = datetime.now()
 
             session.commit()
-            
+
             session.refresh(post)
         
         return post.id

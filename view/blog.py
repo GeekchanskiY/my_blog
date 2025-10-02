@@ -28,7 +28,15 @@ def add_post():
         title = request.form['title']
         content = request.form['content']
 
-        post_id = controller.add_post(title, content)
+        try:
+            post_id = controller.add_post(title, content)
+        except ValueError as e:
+            return render_template(
+                'blog/add_post.html', 
+                form_error=str(e),
+                old_title=title,
+                old_content=content,
+                username=request.request_user)
 
         return redirect(url_for('blog.blog_post', post_id=post_id))
 
