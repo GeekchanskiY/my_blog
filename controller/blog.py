@@ -30,10 +30,30 @@ class BlogController:
         return new_post.id
     
     @staticmethod
+    def update_post(post_id, title, content):
+        if not title or not content:
+            raise ValueError("Title and content cannot be empty")
+        
+        with Session as session:
+            post = session.query(BlogItem).filter(BlogItem.id == post_id).first()
+            if not post:
+                raise ValueError("Post not found")
+            
+            post.title = title
+            post.content = content
+            post.updated_at = datetime.now()
+
+            session.commit()
+            
+            session.refresh(post)
+        
+        return post.id
+    
+    @staticmethod
     def delete_post(post_id):
         with Session as session:
             post = session.query(BlogItem).filter(BlogItem.id == post_id).first()
-            
+
             if post:
                 session.delete(post)
                 session.commit()

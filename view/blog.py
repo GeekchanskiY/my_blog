@@ -34,6 +34,20 @@ def add_post():
 
     return render_template('blog/add_post.html', username=request.request_user)
 
+@blog_bp.route("/update_post/<post_id>", methods=['GET', 'POST'])
+def update_post(post_id):
+    if request.method == 'POST':
+        title = request.form['title']
+        content = request.form['content']
+
+        post_id = controller.update_post(post_id, title, content)
+
+        return redirect(url_for('blog.blog_post', post_id=post_id))
+
+    post = controller.blog_post(post_id)
+
+    return render_template('blog/update_post.html', post=post, username=request.request_user)
+
 
 @blog_bp.route("/delete/<post_id>", methods=['GET'])
 def delete_post(post_id):

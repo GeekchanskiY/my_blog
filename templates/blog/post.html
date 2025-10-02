@@ -10,6 +10,8 @@
     <span>Создан:{{ post.created_at }} </span> <br>
     <span>Обновлен:{{ post.updated_at }}</span> 
     <br><br><br>
+    <a href="/blog/update_post/{{ post.id }}" style="color: black;">обновить</a>
+    <br><br>
     <a href="/blog/delete/{{ post.id }}" style="color: red;">удалить</a>
 
 </div>
